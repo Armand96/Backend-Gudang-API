@@ -14,6 +14,7 @@ class BarangList extends Model //implements AuthenticatableContract, Authorizabl
     protected $table = 'barang_list';
     protected $primaryKey = 'nomor_barang';
     protected $keyType = 'string';
+    public $incrementing = false;
     
 
     public function articles()

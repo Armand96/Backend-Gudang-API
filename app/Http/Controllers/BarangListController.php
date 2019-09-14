@@ -15,7 +15,7 @@ class BarangListController extends Controller
      */
     public function __construct()
     {
-        // $this->middleware('cors');
+        // $this->middleware('auth');
     }
 
     //
@@ -23,7 +23,7 @@ class BarangListController extends Controller
     {
         $data = BarangList::all();
         return response()->json([
-            'succes' => true,
+            'success' => true,
             'data' => $data
         ]);
     }
@@ -109,6 +109,38 @@ class BarangListController extends Controller
             'data'=>$data
         ]);
 
+    }
+
+    public function OnlyNomorBarang(){
+
+        $data = BarangList::distinct()->orderby("nomor_barang")->get('nomor_barang');
+        return response()->json([
+            'success'=>true,
+            'data'=>$data
+        ]);
+    }
+
+    public function OnlyNomorNamaBarang(){
+
+        $data = BarangList::distinct()->orderby("nomor_barang")->get(['nomor_barang', 'nama_barang']);
+        return response()->json([
+            'success'=>true,
+            'data'=>$data
+        ]);
+    }
+    
+
+    public function perubahanKuantitas(Request $req){
+
+        $data = BarangList::where('nomor_barang', $req->input('nomor_barang'))->first();
+        $data->kuantitas += $req->input('kuantitas');
+        if($data->save()){
+            return response()->json([
+                'success'=>true,
+                'data'=>$data
+            ]);
+        }
+        
     }
 
     

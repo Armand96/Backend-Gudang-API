@@ -18,21 +18,18 @@ class BarangKeluarController extends Controller
         // $this->middleware('cors');
     }
 
-    private $selfield = ['barang_keluar.nomor_barang', 'barang_list.nama_barang', 
+    private $selfield = ['id','barang_keluar.nomor_barang', 'barang_list.nama_barang', 'bengkel',
                         'proyek', 'no_order', 'pekerjaan', 'kode_pekerjaan',
-                        'tgl_keluar', 'jml_klr_permintaan_angka', 'jml_klr_angka', 'satuan'];
+                        'tgl_keluar', 'jml_klr_permintaan_angka', 'jml_klr_angka'];
     //
     public function ShowAll(){
 
-        unset($this->selfield[7]);
-        unset($this->selfield[8]);
-        unset($this->selfield[9]);
+        // unset($this->selfield[7]);
+        // unset($this->selfield[8]);
 
-        $data = BarangKeluar::select($this->selfield)
-                ->leftJoin('barang_list', 'barang_list.nomor_barang', '=', 'barang_keluar.nomor_barang')
-                ->get();
+        $data = BarangKeluar::all();
         return response()->json([
-            'succes' => true,
+            'success' => true,
             'data' => $data
         ]);
     }
@@ -58,10 +55,13 @@ class BarangKeluarController extends Controller
         $data->no_order = $req->input('no_order');
         $data->bengkel = $req->input('bengkel'); 
         $data->pekerjaan = $req->input('pekerjaan');
-        $data->tgl_keluar = $req->input('tgl_keluar');
+        $data->kode_pekerjaan = $req->input('kode_pekerjaan');
+        // $data->tgl_keluar = $req->input('tgl_keluar');
         $data->nomor_barang = $req->input('nomor_barang');
         $data->jml_klr_angka = $req->input('jml_klr_angka');
         $data->jml_klr_huruf = $req->input('jml_klr_huruf');
+        $data->jml_klr_permintaan_angka = $req->input('jml_klr_permintaan_angka');
+        $data->jml_klr_permintaan_huruf = $req->input('jml_klr_permintaan_huruf');
 
         if ($data->save())
         {

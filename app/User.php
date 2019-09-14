@@ -12,14 +12,15 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 {
     use Authenticatable, Authorizable;
     protected $table = 'user';
-
+    protected $primaryKey = 'userid';
+    // protected $incrementing = true;
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'nomor_pegawai', 'usename',
+        'nomor_pegawai', 'usename'
     ];
 
     /**
@@ -28,6 +29,6 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $hidden = [
-        'userpassword',
+        'userpassword', 'created_at', 'updated_at'
     ];
 }

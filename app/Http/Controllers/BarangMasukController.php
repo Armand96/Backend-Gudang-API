@@ -27,7 +27,7 @@ class BarangMasukController extends Controller
     {
         $data = BarangMasuk::all();
         return response()->json([
-            'succes' => true,
+            'success' => true,
             'data' => $data
         ]);
     }
@@ -47,7 +47,7 @@ class BarangMasukController extends Controller
         $data = new BarangMasuk();
         $data->asal_barang = $req->input('asal_barang');
         $data->no_kontrak = $req->input('no_kontrak');
-        $data->tgl_masuk = $req->input('tgl_masuk'); 
+        // $data->tgl_masuk = $req->input('tgl_masuk'); 
         $data->nomor_barang = $req->input('nomor_barang');
         $data->jml_msk_angka = $req->input('jml_msk_angka');
         $data->jml_msk_huruf = $req->input('jml_msk_huruf');
@@ -63,7 +63,7 @@ class BarangMasukController extends Controller
 
     public function updateBarangMasuk(Request $req){
 
-        // 'nomor_barang', 'nama_barang', 'satuan', 'kuantitas', 'harga_satuan', 'dibuat_oleh'
+        // 
         $data = BarangMasuk::where('id', $req->input('id'))->first();
         $data->asal_barang = $req->input('asal_barang');
         $data->no_kontrak = $req->input('no_kontrak');
@@ -143,6 +143,15 @@ class BarangMasukController extends Controller
     public function CountBarangMasuk(){
 
         $data = BarangMasuk::count();
+        return response()->json([
+            'success'=>true,
+            'data'=>$data
+        ]);
+    }
+
+    public function DistinctBarang(){
+        
+        $data = BarangMasuk::distinct()->get('nomor_barang');
         return response()->json([
             'success'=>true,
             'data'=>$data

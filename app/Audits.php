@@ -19,8 +19,7 @@ class Audits extends Model //implements AuthenticatableContract, AuthorizableCon
      * @var array
      */
     protected $fillable = [
-        'userid','tipe_audit', 'nomor_barang', 'barang_keluar_id', 
-        'barang_masuk_id', 'nilai_lama', 'nilai_baru',
+        'userid', 'tipe_audit', 'nilai_lama', 'nilai_baru',
     ];
 
     /**
