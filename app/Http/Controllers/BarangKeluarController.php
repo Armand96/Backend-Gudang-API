@@ -56,7 +56,7 @@ class BarangKeluarController extends Controller
         $data->bengkel = $req->input('bengkel'); 
         $data->pekerjaan = $req->input('pekerjaan');
         $data->kode_pekerjaan = $req->input('kode_pekerjaan');
-        // $data->tgl_keluar = $req->input('tgl_keluar');
+        $data->tgl_keluar = $req->input('tgl_keluar');
         $data->nomor_barang = $req->input('nomor_barang');
         $data->jml_klr_angka = $req->input('jml_klr_angka');
         $data->jml_klr_huruf = $req->input('jml_klr_huruf');

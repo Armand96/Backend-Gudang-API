@@ -96,8 +96,6 @@ $router->group(['prefix'=>'api'], function() use($router){
 
         $router->get('/nomorbarangonly', 'BarangListController@OnlyNomorBarang');
 
-        
-
         #================================ BARANG LIST ================================
 
         #================================ BARANG KELUAR ================================
@@ -121,6 +119,8 @@ $router->group(['prefix'=>'api'], function() use($router){
         $router->post('/nokontrak', 'BarangMasukController@selectBasedNoKontrak');
 
         $router->post('/nmrdisbarangmasuk', 'BarangMasukController@DistinctBarang');
+
+        $router->get('/asalbarangdis', 'BarangMasukController@DistinctAsal');
 
         #================================ BARANG MASUK ================================
 

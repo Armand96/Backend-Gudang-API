@@ -112,10 +112,11 @@ class BarangMasukController extends Controller
 
     public function selectBasedAsal(Request $req){
         unset($this->selfield[2]);
-        $data = BarangMasuk::where('asal_barang', '=', $req->input('asal'))
+        array_push($this->selfield, 'barang_list.satuan', 'id');
+        $data = BarangMasuk::where('asal_barang', '=', $req->input('asal_barang'))
                             ->leftJoin('barang_list', 'barang_list.nomor_barang', '=', 'barang_masuk.nomor_barang')
                             ->select($this->selfield)->get();
-        $json['asal'] = $req->input('asal');
+        $json['asal'] = $req->input('asal_barang');
         $json['arraydata'] = $data;
 
         return response()->json([
@@ -152,6 +153,15 @@ class BarangMasukController extends Controller
     public function DistinctBarang(){
         
         $data = BarangMasuk::distinct()->get('nomor_barang');
+        return response()->json([
+            'success'=>true,
+            'data'=>$data
+        ]);
+    }
+
+    public function DistinctAsal(){
+        
+        $data = BarangMasuk::distinct()->get('asal_barang');
         return response()->json([
             'success'=>true,
             'data'=>$data
