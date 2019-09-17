@@ -105,6 +105,7 @@ class BarangKeluarController extends Controller
 
     public function selectBasedProject(Request $req){
 
+        array_push($this->selfield, 'jml_klr_huruf', 'barang_list.satuan', 'jml_klr_permintaan_huruf');
         $data = BarangKeluar::where('proyek', '=', $req->input('proyek'))
                             ->leftJoin('barang_list', 'barang_list.nomor_barang', '=', 'barang_keluar.nomor_barang')
                             ->select($this->selfield)->get();
@@ -120,6 +121,7 @@ class BarangKeluarController extends Controller
 
     public function selectBasedBengkel(Request $req){
 
+        array_push($this->selfield, 'jml_klr_huruf', 'barang_list.satuan', 'jml_klr_permintaan_huruf');
         $data = BarangKeluar::where('bengkel', '=', $req->input('bengkel'))
                             ->leftJoin('barang_list', 'barang_list.nomor_barang', '=', 'barang_keluar.nomor_barang')
                             ->select($this->selfield)->get();
@@ -150,7 +152,8 @@ class BarangKeluarController extends Controller
     }
 
     public function selectBasedNomorBarang(Request $req){
-        unset($this->selfield[0]);
+        
+        array_push($this->selfield, 'jml_klr_huruf');
         $data = BarangKeluar::where('barang_keluar.nomor_barang', '=', $req->input('nomor_barang'))
                                 ->leftJoin('barang_list', 'barang_list.nomor_barang', '=', 'barang_keluar.nomor_barang')
                                 ->select($this->selfield)->get();
@@ -175,6 +178,33 @@ class BarangKeluarController extends Controller
             'data'=>$data
         ]);
 
+    }
+
+    public function DistinctBarang(){
+        
+        $data = BarangKeluar::distinct()->get('nomor_barang');
+        return response()->json([
+            'success'=>true,
+            'data'=>$data
+        ]);
+    }
+
+    public function DistinctBengkel(){
+        
+        $data = BarangKeluar::distinct()->get('bengkel');
+        return response()->json([
+            'success'=>true,
+            'data'=>$data
+        ]);
+    }
+
+    public function DistinctProyek(){
+        
+        $data = BarangKeluar::distinct()->get('proyek');
+        return response()->json([
+            'success'=>true,
+            'data'=>$data
+        ]);
     }
 
 }

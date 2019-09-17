@@ -94,6 +94,7 @@ class BarangMasukController extends Controller
 
     public function selectBasedNomorBarang(Request $req){
         unset($this->selfield[0]);
+        array_push($this->selfield, 'id');
         $data = BarangMasuk::where('barang_masuk.nomor_barang', '=', $req->input('nomor_barang'))
                                 ->leftJoin('barang_list', 'barang_list.nomor_barang', '=', 'barang_masuk.nomor_barang')
                                 ->select($this->selfield)->get();

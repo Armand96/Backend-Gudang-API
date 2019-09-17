@@ -101,12 +101,18 @@ $router->group(['prefix'=>'api'], function() use($router){
         #================================ BARANG KELUAR ================================
 
         $router->post('/proyek', 'BarangKeluarController@selectBasedProject');
+        
+        $router->get('/proyekdis', 'BarangKeluarController@DistinctProyek');
 
         $router->post('/bengkel', 'BarangKeluarController@selectBasedBengkel');
+        
+        $router->get('/bengkeldis', 'BarangKeluarController@DistinctBengkel');
         
         $router->post('/pekerjaan', 'BarangKeluarController@selectBasedPekerjaan');
 
         $router->post('/nomorbarangkeluar', 'BarangKeluarController@selectBasedNomorBarang');
+
+        $router->get('/nmrdisbarangkeluar', 'BarangKeluarController@DistinctBarang');
 
         #================================ BARANG KELUAR ================================
 
@@ -118,7 +124,7 @@ $router->group(['prefix'=>'api'], function() use($router){
 
         $router->post('/nokontrak', 'BarangMasukController@selectBasedNoKontrak');
 
-        $router->post('/nmrdisbarangmasuk', 'BarangMasukController@DistinctBarang');
+        $router->get('/nmrdisbarangmasuk', 'BarangMasukController@DistinctBarang');
 
         $router->get('/asalbarangdis', 'BarangMasukController@DistinctAsal');
 
