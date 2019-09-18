@@ -19,7 +19,7 @@ class Audits extends Model //implements AuthenticatableContract, AuthorizableCon
      * @var array
      */
     protected $fillable = [
-        'userid', 'tipe_audit', 'nilai_lama', 'nilai_baru',
+        'user', 'tipe_audit', 'nilai_lama', 'nilai_baru',
     ];
 
     /**
@@ -28,6 +28,6 @@ class Audits extends Model //implements AuthenticatableContract, AuthorizableCon
      * @var array
      */
     protected $hidden = [
-        // 'created_at', 'updated_at'
+        'updated_at'// 'created_at', 'updated_at'
     ];
 }

@@ -22,7 +22,7 @@ class AuditsController extends Controller
     public function ShowAll(){
         $data = Audits::all();
         return response()->json([
-            'succes' => true,
+            'success' => true,
             'data' => $data
         ]);
     }
@@ -40,11 +40,11 @@ class AuditsController extends Controller
         // 'userid','tipe_audit', 'nomor_barang', 'barang_keluar_id', 
         // 'barang_masuk_id', 'nilai_lama', 'nilai_baru',
         $data = new Audits();
-        $data->userid = $req->input('userid');
+        $data->user = $req->input('user');
         $data->tipe_audit = $req->input('tipe_audit');
-        $data->nomor_barang = $req->input('nomor_barang'); 
-        $data->barang_keluar_id = $req->input('barang_keluar_id');
-        $data->barang_masuk_id = $req->input('barang_masuk_id');
+        // $data->nomor_barang = $req->input('nomor_barang'); 
+        // $data->barang_keluar_id = $req->input('barang_keluar_id');
+        // $data->barang_masuk_id = $req->input('barang_masuk_id');
         $data->nilai_lama = $req->input('nilai_lama');
         $data->nilai_baru = $req->input('nilai_baru');
 

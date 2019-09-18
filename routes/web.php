@@ -77,11 +77,11 @@ $router->group(['prefix'=>'api'], function() use($router){
 
         // ================================ AUDIT ================================
 
-        $router->get('/auditshowall', 'AuditController@ShowAll'); // Tampilkan Semua Audit
+        $router->get('/auditshowall', 'AuditsController@ShowAll'); // Tampilkan Semua Audit
 
-        $router->get('/auditsingle/{id}', 'AuditController@ShowSingle'); // Tampilkan Satu Audit
+        $router->get('/auditsingle/{id}', 'AuditsController@ShowSingle'); // Tampilkan Satu Audit
 
-        $router->post('/auditinsert', 'AuditController@InsertAudit'); // Masukkan Audit Baru
+        $router->post('/auditinsert', 'AuditsController@InsertAudit'); // Masukkan Audit Baru
 
         // ================================ AUDIT ================================
 
@@ -158,5 +158,7 @@ $router->group(['prefix'=>'api'], function() use($router){
 });
 
 $router->get('/{any:.*}', function($any){
-    return "<h1 style='text-align:center'> FUCK OFF!!!! </h1>";
+    // return "<h1 style='text-align:center'> FUCK OFF!!!! </h1>";
+    // return redirect('http://www.kontol.com');
+    return date('Y-m-d H:i:s');
  });
