@@ -88,19 +88,27 @@ class UserController extends Controller
 
         $user = User::where('username', $username)->first();
 
-        if(Hash::check($password, $user->userpassword)){
-            $apiToken = base64_encode(str_random(20));
-            $user->api_token = $apiToken;
-            $user->save();
-            
-            return response()->json([
-                'success' => true,
-                'data'=>[
-                    'username'=>$user->username,
-                    'api_token'=>$apiToken
-                ]
-            ]);
+        if ($user != null) {
+            if(Hash::check($password, $user->userpassword)){
+                $apiToken = base64_encode(str_random(20));
+                $user->api_token = $apiToken;
+                $user->save();
+                
+                return response()->json([
+                    'success' => true,
+                    'data'=>[
+                        'username'=>$user->username,
+                        'api_token'=>$apiToken
+                    ]
+                ]);
+            }
         }
+        else return response()->json([
+            'success' => false,
+            'message' => 'username atau password salah'
+        ], 200);
+
+        
     }
 
     public function checkLogin(Request $req){

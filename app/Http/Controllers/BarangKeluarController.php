@@ -182,7 +182,8 @@ class BarangKeluarController extends Controller
 
     public function DistinctBarang(){
         
-        $data = BarangKeluar::distinct()->get('nomor_barang');
+        $data = BarangKeluar::distinct()->leftJoin('barang_list', 'barang_list.nomor_barang', '=', 'barang_keluar.nomor_barang')
+        ->get(['barang_list.nomor_barang', 'barang_list.nama_barang']);;
         return response()->json([
             'success'=>true,
             'data'=>$data

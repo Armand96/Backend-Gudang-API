@@ -21,4 +21,4 @@ QUEUE_CONNECTION=sync
 
 
 --- also change in vendor/laravel/lumen-framework/config/database.php
-comment the timezone, so the time isn't disturbed
+comment the timezone, so the time isn't disturbed, after running command composer install
