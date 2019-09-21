@@ -33,7 +33,9 @@ class BarangMasukController extends Controller
     }
 
     public function ShowSingle($id){
-        $data = BarangMasuk::where('id', $id)->first();
+        array_push($this->selfield, 'barang_list.satuan', 'id');
+        $data = BarangMasuk::where('id', $id)->leftJoin('barang_list', 'barang_list.nomor_barang', '=', 'barang_masuk.nomor_barang')
+        ->select($this->selfield)->get();;
         return response()->json([
             'success'=>true,
             'data'=>$data
