@@ -179,6 +179,6 @@ $router->group(['prefix'=>'api'], function() use($router){
 
 $router->get('/{any:.*}', function($any){
     // return "<h1 style='text-align:center'> FUCK OFF!!!! </h1>";
-    // return redirect('http://www.kontol.com');
-    return date('Y-m-d H:i:s');
+    return redirect('http://www.kontol.com');
+    // return date('Y-m-d H:i:s');
  });
