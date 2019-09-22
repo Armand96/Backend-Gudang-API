@@ -19,7 +19,7 @@ class BarangMasuk extends Model //implements AuthenticatableContract, Authorizab
      * @var array
      */
     protected $fillable = [
-        'asal_barang', 'no_kontrak', 'tgl_masuk', 'nomor_barang', 
+        'no_bapm','asal_barang', 'no_kontrak', 'tgl_masuk', 'nomor_barang', 
         'jml_msk_angka', 'jml_msk_huruf', 'keterangan'
     ];
 

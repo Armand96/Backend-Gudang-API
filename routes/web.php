@@ -34,6 +34,23 @@ $router->group(['prefix'=>'api'], function() use($router){
     
     $router->group(['middleware'=>'auth'], function() use($router){
 
+        // ================================= NO ORDER =================================
+
+        $router->get('/noorderall', 'NoOrderController@ShowAll');
+
+        $router->get('/noordersingle/{id}', 'NoOrderController@ShowSingle');
+        
+        // ================================= NO ORDER =================================
+
+        // ================================= KODE PEKERJAAN =================================
+
+        $router->get('/kodepekerjaanall', 'KodePekerjaanController@ShowAll');
+
+        $router->get('/kodepekerjaansingle/{id}', 'KodePekerjaanController@ShowSingle');
+        
+        // ================================= KODE PEKERJAAN =================================
+
+
         // ================================= LIST BARANG =================================
 
         $router->get('/barangshowall', 'BarangListController@ShowAll'); // Tampilkan Semua Barang
@@ -100,35 +117,38 @@ $router->group(['prefix'=>'api'], function() use($router){
 
         #================================ BARANG KELUAR ================================
 
+        // ========== SELECT BASED
+        $router->post('/nospm', 'BarangKeluarController@selectBasedNoSPM');
         $router->post('/proyek', 'BarangKeluarController@selectBasedProject');
-        
-        $router->get('/proyekdis', 'BarangKeluarController@DistinctProyek');
-
         $router->post('/bengkel', 'BarangKeluarController@selectBasedBengkel');
-        
-        $router->get('/bengkeldis', 'BarangKeluarController@DistinctBengkel');
-        
+        $router->post('/noorders', 'BarangKeluarController@selectBasedNoOrder');        
         $router->post('/pekerjaan', 'BarangKeluarController@selectBasedPekerjaan');
-
         $router->post('/nomorbarangkeluar', 'BarangKeluarController@selectBasedNomorBarang');
 
+        // ===================== DISTINCT
         $router->get('/nmrdisbarangkeluar', 'BarangKeluarController@DistinctBarang');
+        $router->get('/proyekdis', 'BarangKeluarController@DistinctProyek');
+        $router->get('/bengkeldis', 'BarangKeluarController@DistinctBengkel');
+        $router->get('/nospmdis', 'BarangKeluarController@DistinctNoSPM');
 
-        #================================ BARANG KELUAR ================================
+        #================================ END OF BARANG KELUAR ================================
+
 
         #================================ BARANG MASUK ================================
 
+        $router->post('/nobapm', 'BarangMasukController@selectBasedNoBAPM');
         $router->post('/nomorbarangmasuk', 'BarangMasukController@selectBasedNomorBarang');
-
         $router->post('/asalbarang', 'BarangMasukController@selectBasedAsal');
-
         $router->post('/nokontrak', 'BarangMasukController@selectBasedNoKontrak');
-
+        
+        // ======================== DISTINCT
         $router->get('/nmrdisbarangmasuk', 'BarangMasukController@DistinctBarang');
-
+        $router->get('/nokontrakdis', 'BarangMasukController@DistinctKontrak');
         $router->get('/asalbarangdis', 'BarangMasukController@DistinctAsal');
+        $router->get('/nobapmdis', 'BarangMasukController@DistinctBAPM');
 
-        #================================ BARANG MASUK ================================
+        #================================ END OF BARANG MASUK ================================
+
 
         #### =============================== GENERAL ============================= ####
         $router->get('/countbarangmasuk', 'BarangMasukController@CountBarangMasuk');

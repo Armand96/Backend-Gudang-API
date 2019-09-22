@@ -11,7 +11,7 @@ class BarangMasukController extends Controller
 
     private $selfield = ['barang_masuk.nomor_barang', 'barang_list.nama_barang', 
                         'asal_barang', 'no_kontrak', 'tgl_masuk', 'jml_msk_angka',
-                        'jml_msk_huruf', 'keterangan'];
+                        'jml_msk_huruf', 'keterangan', 'no_bapm'];
     /**
      * Create a new controller instance.
      *
@@ -47,6 +47,7 @@ class BarangMasukController extends Controller
         // 'asal_barang', 'no_kontrak', 'tgl_masuk', 'nomor_barang', 
         // 'jml_msk_angka', 'jml_msk_huruf', 'keterangan'
         $data = new BarangMasuk();
+        $data->no_bapm = $req->input('no_bapm');
         $data->asal_barang = $req->input('asal_barang');
         $data->no_kontrak = $req->input('no_kontrak');
         // $data->tgl_masuk = $req->input('tgl_masuk'); 
@@ -67,6 +68,7 @@ class BarangMasukController extends Controller
 
         // 
         $data = BarangMasuk::where('id', $req->input('id'))->first();
+        $data->no_bapm = $req->input('no_bapm');
         $data->asal_barang = $req->input('asal_barang');
         $data->no_kontrak = $req->input('no_kontrak');
         $data->tgl_masuk = $req->input('tgl_masuk'); 
@@ -114,12 +116,12 @@ class BarangMasukController extends Controller
     }
 
     public function selectBasedAsal(Request $req){
-        unset($this->selfield[2]);
+        // unset($this->selfield[2]);
         array_push($this->selfield, 'barang_list.satuan', 'id');
         $data = BarangMasuk::where('asal_barang', '=', $req->input('asal_barang'))
                             ->leftJoin('barang_list', 'barang_list.nomor_barang', '=', 'barang_masuk.nomor_barang')
                             ->select($this->selfield)->get();
-        $json['asal'] = $req->input('asal_barang');
+        // $json['asal'] = $req->input('asal_barang');
         $json['arraydata'] = $data;
 
         return response()->json([
@@ -130,11 +132,28 @@ class BarangMasukController extends Controller
     }
 
     public function selectBasedNoKontrak(Request $req){
-        unset($this->selfield[3]);
+        // unset($this->selfield[3]);
+        array_push($this->selfield, 'barang_list.satuan', 'id');
         $data = BarangMasuk::where('no_kontrak', '=', $req->input('no_kontrak'))
                             ->leftJoin('barang_list', 'barang_list.nomor_barang', '=', 'barang_masuk.nomor_barang')
                             ->select($this->selfield)->get();
-        $json['no_kontrak'] = $req->input('no_kontrak');
+        // $json['no_kontrak'] = $req->input('no_kontrak');
+        $json['arraydata'] = $data;
+
+        return response()->json([
+            'success'=>true,
+            'data'=>$json
+        ]);
+
+    }
+
+    public function selectBasedNoBAPM(Request $req){
+        // unset($this->selfield[3]);
+        array_push($this->selfield, 'barang_list.satuan', 'id');
+        $data = BarangMasuk::where('no_bapm', '=', $req->input('no_bapm'))
+                            ->leftJoin('barang_list', 'barang_list.nomor_barang', '=', 'barang_masuk.nomor_barang')
+                            ->select($this->selfield)->get();
+        // $json['no_kontrak'] = $req->input('no_kontrak');
         $json['arraydata'] = $data;
 
         return response()->json([
@@ -147,6 +166,19 @@ class BarangMasukController extends Controller
     public function CountBarangMasuk(){
 
         $data = BarangMasuk::count();
+        return response()->json([
+            'success'=>true,
+            'data'=>$data
+        ]);
+    }
+
+    // ================================== DISTINCT
+
+    public function DistinctBAPM(){
+        
+        $data = BarangMasuk::distinct()
+                                ->leftJoin('barang_list', 'barang_list.nomor_barang', '=', 'barang_masuk.nomor_barang')
+                                ->get('no_bapm');
         return response()->json([
             'success'=>true,
             'data'=>$data
@@ -167,6 +199,15 @@ class BarangMasukController extends Controller
     public function DistinctAsal(){
         
         $data = BarangMasuk::distinct()->get('asal_barang');
+        return response()->json([
+            'success'=>true,
+            'data'=>$data
+        ]);
+    }
+
+    public function DistinctKontrak(){
+        
+        $data = BarangMasuk::distinct()->get('no_kontrak');
         return response()->json([
             'success'=>true,
             'data'=>$data

@@ -8,23 +8,25 @@ use Illuminate\Database\Eloquent\Model;
 // use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 // use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 
-class BarangKeluar extends Model //implements AuthenticatableContract, AuthorizableContract
+class KodePekerjaan extends Model //implements AuthenticatableContract, AuthorizableContract
 {
     //use Authenticatable, Authorizable;
-    protected $table = 'barang_keluar';
+    protected $table = 'kode_pekerjaan';
+    protected $primaryKey = 'kode_pekerjaan';
+    protected $keyType = 'string';
+    public $incrementing = false;
 
-    public function BarangList()
-    {
-        return $this->belongsTo('App\Models\BarangList');
-    }
+    // public function BarangList()
+    // {
+    //     return $this->belongsTo('App\Models\BarangList');
+    // }
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'no_spm', 'proyek', 'no_order', 'kode_pekerjaan', 'tgl_keluar', 
-        'nomor_barang', 'jml_klr_angka', 'jml_klr_huruf', 'jml_klr_pemrintaan_angka', 'jml_klr_pemrintaan_huruf', 
+        'kode_pekerjaan', 'pekerjaan'
     ];
 
     /**

@@ -16,7 +16,8 @@ class BarangKeluar extends Migration
         Schema::create('barang_keluar', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('proyek', 50);
-            $table->integer('no_order', false, true);
+            $table->string('no_spm', 10);
+            $table->string('no_order', 20);
             $table->string('bengkel', 50);
             $table->string('pekerjaan', 50);
             $table->integer('kode_pekerjaan', false, true);

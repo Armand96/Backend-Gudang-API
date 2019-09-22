@@ -15,6 +15,7 @@ class BarangMasuk extends Migration
     {
         Schema::create('barang_masuk', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('no_bapm', 20);
             $table->string('asal_barang', 30);
             $table->string('no_kontrak', 30);
             $table->date('tgl_masuk', 30);

@@ -18,9 +18,10 @@ class BarangKeluarController extends Controller
         // $this->middleware('cors');
     }
 
-    private $selfield = ['id','barang_keluar.nomor_barang', 'barang_list.nama_barang', 'bengkel',
-                        'proyek', 'no_order', 'pekerjaan', 'kode_pekerjaan',
-                        'tgl_keluar', 'jml_klr_permintaan_angka', 'jml_klr_angka'];
+    private $selfield = ['id','barang_keluar.nomor_barang', 'barang_list.nama_barang',
+                        'proyek', 'barang_keluar.no_order', 'barang_keluar.kode_pekerjaan',
+                        'tgl_keluar', 'jml_klr_permintaan_angka', 'jml_klr_angka', 'kode_pekerjaan.pekerjaan',
+                        'no_order.bengkel', 'no_spm'];
     //
     public function ShowAll(){
 
@@ -51,10 +52,11 @@ class BarangKeluarController extends Controller
         // 'proyek', 'no_order', 'bengkel', 'pekerjaan', 'tgl_keluar', 
         // 'nomor_barang', 'jml_klr_angka', 'jml_klr_huruf',
         $data = new BarangKeluar();
+        $data->no_spm = $req->input('no_spm');
         $data->proyek = $req->input('proyek');
         $data->no_order = $req->input('no_order');
-        $data->bengkel = $req->input('bengkel'); 
-        $data->pekerjaan = $req->input('pekerjaan');
+        // $data->bengkel = $req->input('bengkel'); 
+        // $data->pekerjaan = $req->input('pekerjaan');
         $data->kode_pekerjaan = $req->input('kode_pekerjaan');
         $data->tgl_keluar = $req->input('tgl_keluar');
         $data->nomor_barang = $req->input('nomor_barang');
@@ -75,10 +77,10 @@ class BarangKeluarController extends Controller
 
         // 'nomor_barang', 'nama_barang', 'satuan', 'kuantitas', 'harga_satuan', 'dibuat_oleh'
         $data = BarangKeluar::where('id', $req->input('id'))->first();
+        $data->no_spm = $req->input('no_spm');
         $data->proyek = $req->input('proyek');
         $data->no_order = $req->input('no_order');
-        $data->bengkel = $req->input('bengkel'); 
-        $data->pekerjaan = $req->input('pekerjaan');
+        $data->no_order = $req->input('kode_pekerjaan');
         $data->tgl_keluar = $req->input('tgl_keluar');
         $data->nomor_barang = $req->input('nomor_barang');
         $data->jml_klr_angka = $req->input('jml_klr_angka');
@@ -103,11 +105,31 @@ class BarangKeluarController extends Controller
         }
     }
 
+    public function selectBasedNoSPM(Request $req){
+
+        array_push($this->selfield, 'jml_klr_huruf', 'barang_list.satuan', 'jml_klr_permintaan_huruf');
+        $data = BarangKeluar::where('no_spm', '=', $req->input('no_spm'))
+                            ->leftJoin('barang_list', 'barang_list.nomor_barang', '=', 'barang_keluar.nomor_barang')
+                            ->leftJoin('kode_pekerjaan', 'kode_pekerjaan.kode_pekerjaan', '=', 'barang_keluar.kode_pekerjaan')
+                            ->leftJoin('no_order', 'no_order.no_order', '=', 'barang_keluar.no_order')
+                            ->select($this->selfield)->get();
+
+        // $json['proyek'] = $req->input('proyek');
+        $json['arraydata'] = $data;
+
+        return response()->json([
+            'success'=>true,
+            'data'=>$json
+        ]);
+    }
+
     public function selectBasedProject(Request $req){
 
         array_push($this->selfield, 'jml_klr_huruf', 'barang_list.satuan', 'jml_klr_permintaan_huruf');
         $data = BarangKeluar::where('proyek', '=', $req->input('proyek'))
                             ->leftJoin('barang_list', 'barang_list.nomor_barang', '=', 'barang_keluar.nomor_barang')
+                            ->leftJoin('kode_pekerjaan', 'kode_pekerjaan.kode_pekerjaan', '=', 'barang_keluar.kode_pekerjaan')
+                            ->leftJoin('no_order', 'no_order.no_order', '=', 'barang_keluar.no_order')
                             ->select($this->selfield)->get();
 
         $json['proyek'] = $req->input('proyek');
@@ -121,11 +143,13 @@ class BarangKeluarController extends Controller
 
     public function selectBasedBengkel(Request $req){
 
-        array_push($this->selfield, 'jml_klr_huruf', 'barang_list.satuan', 'jml_klr_permintaan_huruf');
+        array_push($this->selfield, 'jml_klr_huruf', 'barang_list.satuan', 'jml_klr_permintaan_huruf', 'pekerjaan', 'bengkel');
         $data = BarangKeluar::where('bengkel', '=', $req->input('bengkel'))
                             ->leftJoin('barang_list', 'barang_list.nomor_barang', '=', 'barang_keluar.nomor_barang')
+                            ->leftJoin('kode_pekerjaan', 'kode_pekerjaan.kode_pekerjaan', '=', 'barang_keluar.kode_pekerjaan')
+                            ->leftJoin('no_order', 'no_order.no_order', '=', 'barang_keluar.no_order')
                             ->select($this->selfield)->get();
-        $json['bengkel'] = $req->input('bengkel');
+        // $json['bengkel'] = $req->input('bengkel');
         $json['arraydata'] = $data;
 
         return response()->json([
@@ -135,13 +159,32 @@ class BarangKeluarController extends Controller
 
     }
 
-    public function selectBasedPekerjaan(Request $req){
-        unset($this->selfield[4]);
-        $data = BarangKeluar::where('pekerjaan', '=', $req->input('pekerjaan'))
+    public function selectBasedNoOrder(Request $req){
+
+        array_push($this->selfield, 'jml_klr_huruf', 'barang_list.satuan', 'jml_klr_permintaan_huruf', 'pekerjaan', 'bengkel');
+        $data = BarangKeluar::where('barang_keluar.no_order', '=', $req->input('no_order'))
+                            ->leftJoin('barang_list', 'barang_list.nomor_barang', '=', 'barang_keluar.nomor_barang')
+                            ->leftJoin('kode_pekerjaan', 'kode_pekerjaan.kode_pekerjaan', '=', 'barang_keluar.kode_pekerjaan')
+                            ->leftJoin('no_order', 'no_order.no_order', '=', 'barang_keluar.no_order')
+                            ->select($this->selfield)->get();
+        // $json['bengkel'] = $req->input('bengkel');
+        $json['arraydata'] = $data;
+
+        return response()->json([
+            'success'=>true,
+            'data'=>$json
+        ]);
+
+    }
+
+    public function selectBasedKodePekerjaan(Request $req){
+        // unset($this->selfield[4]);
+        $data = BarangKeluar::where('barang_keluar.kode_pekerjaan', '=', $req->input('kode_pekerjaan'))
                                 ->leftJoin('barang_list', 'barang_list.nomor_barang', '=', 'barang_keluar.nomor_barang')
+                                ->leftJoin('kode_pekerjaan', 'kode_pekerjaan.kode_pekerjaan', '=', 'barang_keluar.kode_pekerjaan')
                                 ->select($this->selfield)->get();
 
-        $json['pekerjaan'] = $req->input('pekerjaan');
+        // $json['pekerjaan'] = $req->input('pekerjaan');
         $json['arraydata'] = $data;
 
         return response()->json([
@@ -180,10 +223,21 @@ class BarangKeluarController extends Controller
 
     }
 
+    // ===================================== DISTINCT
+
     public function DistinctBarang(){
         
         $data = BarangKeluar::distinct()->leftJoin('barang_list', 'barang_list.nomor_barang', '=', 'barang_keluar.nomor_barang')
         ->get(['barang_list.nomor_barang', 'barang_list.nama_barang']);;
+        return response()->json([
+            'success'=>true,
+            'data'=>$data
+        ]);
+    }
+
+    public function DistinctNoSPM(){
+        
+        $data = BarangKeluar::distinct()->get('no_spm');
         return response()->json([
             'success'=>true,
             'data'=>$data

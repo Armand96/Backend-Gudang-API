@@ -1,0 +1,6 @@
+Tabel No.Order
+kolom: no_order, bengkel
+Tabel Pekerjaan
+kolom: kode_pekerjaan, pekerjaan
+
+patokan barang keluar di bengkel ganti no_order
