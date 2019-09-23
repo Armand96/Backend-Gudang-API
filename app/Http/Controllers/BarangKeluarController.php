@@ -36,7 +36,8 @@ class BarangKeluarController extends Controller
     }
 
     public function ShowSingle($id){
-
+        unset($this->selfield[9]);
+        unset($this->selfield[10]);
         array_push($this->selfield, 'jml_klr_permintaan_huruf', 'jml_klr_huruf');
         $data = BarangKeluar::where('id', $id)
                 ->leftJoin('barang_list', 'barang_list.nomor_barang', '=', 'barang_keluar.nomor_barang')
