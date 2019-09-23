@@ -68,6 +68,8 @@ $router->group(['prefix'=>'api'], function() use($router){
 
         // ============================== BARANG KELUAR ==============================
         
+        $router->get('/barangkeluardis', 'BarangKeluarController@ShowDistinct'); // Tampilkan Semua Barang Keluar
+
         $router->get('/barangkeluarshowall', 'BarangKeluarController@ShowAll'); // Tampilkan Semua Barang Keluar
 
         $router->get('/barangkeluarsingle/{id}', 'BarangKeluarController@ShowSingle'); // Tampilkan Satu Barang Keluar
@@ -81,6 +83,8 @@ $router->group(['prefix'=>'api'], function() use($router){
 
         // ============================== BARANG MASUK ==============================
         
+        $router->get('/barangmasukdis', 'BarangMasukController@DistinctShow'); // Tampilkan Semua Barang Keluar
+
         $router->get('/barangmasukshowall', 'BarangMasukController@ShowAll'); // Tampilkan Semua Barang Keluar
 
         $router->get('/barangmasuksingle/{id}', 'BarangMasukController@ShowSingle'); // Tampilkan Satu Barang Keluar

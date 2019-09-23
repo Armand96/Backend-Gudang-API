@@ -174,6 +174,15 @@ class BarangMasukController extends Controller
 
     // ================================== DISTINCT
 
+    public function DistinctShow(){
+        
+        $data = BarangMasuk::distinct()->get(['no_bapm', 'asal_barang', 'no_kontrak']);
+        return response()->json([
+            'success'=>true,
+            'data'=>$data
+        ]);
+    }
+
     public function DistinctBAPM(){
         
         $data = BarangMasuk::distinct()
