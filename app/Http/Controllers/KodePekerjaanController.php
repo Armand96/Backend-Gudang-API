@@ -27,27 +27,41 @@ class KodePekerjaanController extends Controller
         ]);
     }
 
-    public function ShowSingle($id){
-        $data = KodePekerjaan::where('kode_pekerjaan', $id)->first();
+    public function ShowSingle(Request $req){
+        $data = KodePekerjaan::where('kode_pekerjaan', $req->input('kode_pekerjaan'))->first();
         return response()->json([
             'success'=>true,
             'data'=>$data
         ]);
     }
 
-    // public function InsertAudit(Request $req){
+    public function Update(Request $req){
 
-    //     $data = new KodePekerjaan();
-    //     $data->kode_pekerjaan = $req->input('kode_pekerjaan');
-    //     $data->pekerjaan = $req->input('pekerjaan');
+        $data = KodePekerjaan::where('kode_pekerjaan',$req->input('kode_pekerjaan_old'))->first();
+        $data->kode_pekerjaan = $req->input('kode_pekerjaan');
+        $data->pekerjaan = $req->input('pekerjaan');
 
-    //     if ($data->save())
-    //     {
-    //         return response()->json([
-    //             'success' => true
-    //         ]);
-    //     }
-    // }
+        if ($data->save())
+        {
+            return response()->json([
+                'success' => true
+            ]);
+        }
+    }
+
+    public function Create(Request $req){
+
+        $data = new KodePekerjaan();
+        $data->kode_pekerjaan = $req->input('kode_pekerjaan');
+        $data->pekerjaan = $req->input('pekerjaan');
+
+        if ($data->save())
+        {
+            return response()->json([
+                'success' => true
+            ]);
+        }
+    }
 
 }
 

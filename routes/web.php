@@ -38,7 +38,11 @@ $router->group(['prefix'=>'api'], function() use($router){
 
         $router->get('/noorderall', 'NoOrderController@ShowAll');
 
-        $router->get('/noordersingle/{id}', 'NoOrderController@ShowSingle');
+        $router->post('/noordersingle', 'NoOrderController@ShowSingle');
+
+        $router->post('/noordercreate', 'NoOrderController@newNoOrder');
+
+        $router->post('/noorderupdate', 'NoOrderController@UpdateOrder');
         
         // ================================= NO ORDER =================================
 
@@ -46,7 +50,11 @@ $router->group(['prefix'=>'api'], function() use($router){
 
         $router->get('/kodepekerjaanall', 'KodePekerjaanController@ShowAll');
 
-        $router->get('/kodepekerjaansingle/{id}', 'KodePekerjaanController@ShowSingle');
+        $router->post('/kodepekerjaansingle', 'KodePekerjaanController@ShowSingle');
+
+        $router->post('/kodepekerjaancreate', 'KodePekerjaanController@Create');
+
+        $router->post('/kodepekerjaanupdate', 'KodePekerjaanController@Update');
         
         // ================================= KODE PEKERJAAN =================================
 

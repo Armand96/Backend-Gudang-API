@@ -13,7 +13,7 @@ class KodePekerjaan extends Model //implements AuthenticatableContract, Authoriz
     //use Authenticatable, Authorizable;
     protected $table = 'kode_pekerjaan';
     protected $primaryKey = 'kode_pekerjaan';
-    protected $keyType = 'string';
+    protected $keyType = 'int';
     public $incrementing = false;
 
     // public function BarangList()

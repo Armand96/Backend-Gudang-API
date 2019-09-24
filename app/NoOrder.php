@@ -13,7 +13,7 @@ class NoOrder extends Model //implements AuthenticatableContract, AuthorizableCo
     //use Authenticatable, Authorizable;
     protected $table = 'no_order';
     protected $primaryKey = 'no_order';
-    protected $keyType = 'string';
+    protected $keyType = 'int';
     public $incrementing = false;
 
     // public function BarangList()
