@@ -200,6 +200,8 @@ class BarangKeluarController extends Controller
         array_push($this->selfield, 'jml_klr_huruf');
         $data = BarangKeluar::where('barang_keluar.nomor_barang', '=', $req->input('nomor_barang'))
                                 ->leftJoin('barang_list', 'barang_list.nomor_barang', '=', 'barang_keluar.nomor_barang')
+                                ->leftJoin('kode_pekerjaan', 'kode_pekerjaan.kode_pekerjaan', '=', 'barang_keluar.kode_pekerjaan')
+                                ->leftJoin('no_order', 'no_order.no_order', '=', 'barang_keluar.no_order')
                                 ->select($this->selfield)->get();
         $json['nomor_barang'] = $req->input('nomor_barang');
         $json['nama_barang'] = $data[0]->nama_barang;

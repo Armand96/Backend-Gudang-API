@@ -114,15 +114,25 @@ $router->group(['prefix'=>'api'], function() use($router){
 
         // ================================ AUDIT ================================
 
+        // ================================ PENGADAAN ================================
+
+        $router->get('/pengadaanshowall', 'PengadaanController@ShowAll'); // Tampilkan Semua Pengadaan
+
+        $router->get('/pengadaansingle/{id}', 'PengadaanController@ShowSingle'); // Tampilkan Satu Pengadaan
+
+        $router->post('/pengadaaninsert', 'PengadaanController@InsertPengadaan'); // Masukkan Pengadaan Baru
+
+        $router->post('/pengadaanupdate', 'PengadaanController@UpdatePengadaan'); // Update Pengadaan
+
+        // ================================ PENGADAAN ================================
+
 
         ###################################### ADVANCED QUERY ######################################
 
         #================================ BARANG LIST ================================
 
         $router->get('/toptenbarang', 'BarangListController@TopTenBarang');
-
         $router->get('/mostbarang', 'BarangListController@MostCreatedBarang');
-
         $router->get('/nomorbarangonly', 'BarangListController@OnlyNomorBarang');
 
         #================================ BARANG LIST ================================
@@ -161,6 +171,10 @@ $router->group(['prefix'=>'api'], function() use($router){
 
         #================================ END OF BARANG MASUK ================================
 
+        #================================ PENGADAAN ================================
+        $router->post('/nospp', 'PengadaanController@SelectBasedSPP'); // Pilih Berdasarkan SPP
+        $router->get('/nosppdis', 'PengadaanController@DistinctNoSPP'); // Pilih Berdasarkan SPP Unique
+        #================================ END OF PENGADAAN ================================
 
         #### =============================== GENERAL ============================= ####
         $router->get('/countbarangmasuk', 'BarangMasukController@CountBarangMasuk');
@@ -190,7 +204,10 @@ $router->group(['prefix'=>'api'], function() use($router){
 });
 
 $router->get('/{any:.*}', function($any){
-    // return "<h1 style='text-align:center'> FUCK OFF!!!! </h1>";
-    return redirect('http://www.kontol.com');
+    return "<h1 style='text-align:center'> FUCK OFF!!!! </h1>";
+    // return redirect('http://www.kontol.com');
     // return date('Y-m-d H:i:s');
+    // header("location : ". $_SERVER['HTTP_HOST']);
+    // echo "test";
+    // exit;
  });

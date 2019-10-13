@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 22, 2019 at 03:38 PM
+-- Generation Time: Oct 13, 2019 at 05:52 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -38,14 +38,6 @@ CREATE TABLE `audits` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `audits`
---
-
-INSERT INTO `audits` (`id`, `user`, `tipe_audit`, `nilai_lama`, `nilai_baru`, `created_at`, `updated_at`) VALUES
-(1, 'Iskandar', 'Barang Keluar', '', '{\"no_spm\":\"0001\",\"proyek\":\"INTERN\",\"no_order\":\"620\",\"kode_pekerjaan\":500,\"nomor_barang\":\"1111.005\",\"jml_klr_angka\":1,\"jml_klr_huruf\":\"  Satu  \",\"jml_klr_permintaan_angka\":1,\"jml_klr_permintaan_huruf\":\"  Satu  \",\"tgl_keluar\":\"2019-09-22 19:40:17\"}', '2019-09-22 12:40:17', '2019-09-22 12:40:17'),
-(2, 'Iskandar', 'Barang Masuk', '', '{\"no_bapm\":\"0001\",\"asal_barang\":\"Bkl. Mesin\",\"no_kontrak\":\"1303-2019\",\"nomor_barang\":\"1111.005\",\"jml_msk_angka\":5,\"jml_msk_huruf\":\"  Lima  \",\"keterangan\":\"Test\",\"tgl_masuk\":\"2019-09-22 20:25:16\"}', '2019-09-22 13:25:17', '2019-09-22 13:25:17');
-
 -- --------------------------------------------------------
 
 --
@@ -67,13 +59,6 @@ CREATE TABLE `barang_keluar` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `barang_keluar`
---
-
-INSERT INTO `barang_keluar` (`id`, `proyek`, `no_spm`, `no_order`, `kode_pekerjaan`, `tgl_keluar`, `nomor_barang`, `jml_klr_permintaan_angka`, `jml_klr_permintaan_huruf`, `jml_klr_angka`, `jml_klr_huruf`, `created_at`, `updated_at`) VALUES
-(1, 'INTERN', '0001', '620', 500, '2019-09-22 19:40:17', '1111.005', 1, '  Satu  ', 1, '  Satu  ', '2019-09-22 12:40:17', '2019-09-22 12:40:17');
 
 -- --------------------------------------------------------
 
@@ -97,21 +82,21 @@ CREATE TABLE `barang_list` (
 --
 
 INSERT INTO `barang_list` (`nomor_barang`, `nama_barang`, `satuan`, `kuantitas`, `harga_satuan`, `dibuat_oleh`, `created_at`, `updated_at`) VALUES
-('1111.002', 'PLAT UK.6 MM X 5 X 20', 'KG', 4, 0, 'Admin', '0000-00-00 00:00:00', '2019-09-22 12:03:50'),
-('1111.004', 'PLATE KAPAL NON BKI 8MM X 5\" X 20\"', 'KG', 5, 0, 'Admin', '0000-00-00 00:00:00', '2019-09-22 02:03:06'),
-('1111.005', 'PLAT UK. 9MM X 5\" X 20\"', 'KG', 4, 0, 'Admin', '0000-00-00 00:00:00', '2019-09-22 13:25:17'),
+('1111.002', 'PLAT UK.6 MM X 5 X 20', 'KG', 14, 0, 'Admin', '0000-00-00 00:00:00', '2019-10-13 02:55:48'),
+('1111.004', 'PLATE KAPAL NON BKI 8MM X 5\" X 20\"', 'KG', 4, 0, 'Admin', '0000-00-00 00:00:00', '2019-09-24 13:13:20'),
+('1111.005', 'PLAT UK. 9MM X 5\" X 20\"', 'KG', 14, 0, 'Admin', '0000-00-00 00:00:00', '2019-10-13 02:57:55'),
 ('1111.006', 'PLAT HITAM UK.10MM X 1500 X 6000 (10\"X5\"X20\")', 'KG', 0, 0, 'Admin', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-('1111.007', 'PLAT UK.11MM X 1500 X 6000 (11\"X5\"X20\")', 'KG', 0, 0, 'Admin', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+('1111.007', 'PLAT UK.11MM X 1500 X 6000 (11\"X5\"X20\")', 'KG', 6, 0, 'Admin', '0000-00-00 00:00:00', '2019-10-13 02:59:16'),
 ('1111.008', 'PLAT UK.12MM X 1500 X 6000 (12MX5\"X20\")', 'KG', 0, 0, 'Admin', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 ('1111.01', 'PLATE UK.14MM X 1524 X 6069(14X5\"X20\")', 'KG', 0, 0, 'Admin', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 ('1111.012', 'PLAT 16MM X 5\" X 20\"', 'KG', 0, 0, 'Admin', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-('1111.015', 'PLAT KAPAL UK.19MM X 5\" X 20\"', 'KG', 0, 0, 'Admin', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+('1111.015', 'PLAT KAPAL UK.19MM X 5\" X 20\"', 'KG', 1, 0, 'Admin', '0000-00-00 00:00:00', '2019-10-13 02:59:04'),
 ('1111.016', 'PLATE UK. 20 MM X 5\" X 20\"', 'KG', 0, 0, 'Admin', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 ('1111.017', 'BESI PLAT UK.21MM X5\"X20\"', 'KG', 0, 0, 'Admin', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 ('1111.018', 'PLATE KAPAL UK.22 X 1500 X 6000 MM', 'KG', 0, 0, 'Admin', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 ('1111.021', 'PLAT KAPAL UK.25MM X 5\" X 20\"', 'KG', 0, 0, 'Admin', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 ('1111.024', 'PLATE UK.30 X 5\" X 20\"', 'KG', 0, 0, 'Admin', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-('1111.028', 'PLAT UK.40MM X 5\" X 20\"', 'KG', 0, 0, 'Admin', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+('1111.028', 'PLAT UK.40MM X 5\" X 20\"', 'KG', 0, 0, 'Admin', '0000-00-00 00:00:00', '2019-10-13 03:01:43'),
 ('1111.037', 'PLATE KAPAL UK.9,8 MM X 5\" X 20\"', 'KG', 0, 0, 'Admin', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 ('1111.045', 'PLAT KAPAL UK. 10MM X 5\" X 30\"', 'KG', 0, 0, 'Admin', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 ('1111.048', 'PLATE GR UK. 11 X 5\" X 30\"', 'KG', 0, 0, 'Admin', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
@@ -13201,13 +13186,6 @@ CREATE TABLE `barang_masuk` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `barang_masuk`
---
-
-INSERT INTO `barang_masuk` (`id`, `no_bapm`, `asal_barang`, `no_kontrak`, `tgl_masuk`, `nomor_barang`, `jml_msk_angka`, `jml_msk_huruf`, `keterangan`, `created_at`, `updated_at`) VALUES
-(1, '0001', 'Bkl. Mesin', '1303-2019', '2019-09-22 20:25:16', '1111.005', 5, '  Lima  ', 'Test', '2019-09-22 13:25:16', '2019-09-22 13:25:16');
-
 -- --------------------------------------------------------
 
 --
@@ -13251,7 +13229,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (9, '2019_08_20_232033_barang_masuk', 1),
 (10, '2019_08_21_134506_audits', 1),
 (11, '2019_09_22_110508_no_order', 2),
-(12, '2019_09_22_110810_kode_pekerjaan', 3);
+(12, '2019_09_22_110810_kode_pekerjaan', 3),
+(14, '2019_10_13_102534_pengadaan', 4);
 
 -- --------------------------------------------------------
 
@@ -13276,6 +13255,27 @@ INSERT INTO `no_order` (`no_order`, `bengkel`, `created_at`, `updated_at`) VALUE
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `pengadaan`
+--
+
+CREATE TABLE `pengadaan` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `no_spp` varchar(8) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `proyek` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `no_order` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tgl_pengadaan` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `tgl_penerimaan` datetime NOT NULL,
+  `nama_barang` varchar(120) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `jml_diminta` int(10) UNSIGNED NOT NULL,
+  `satuan` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `keterangan` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user`
 --
 
@@ -13295,7 +13295,7 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`userid`, `nomor_pegawai`, `username`, `userpassword`, `api_token`, `created_at`, `updated_at`) VALUES
 (1, 1, 'Armani', '$2y$10$16JqmvRtfSgw1hSiG0NrP.hptKBNhXJ16iIBeHqwUGu6uBN9BFTrS', 'eEhV4eZnTz6HmSo1lM3IIgU7jfHv4M', '2019-08-25 08:26:55', '2019-08-25 10:42:28'),
-(2, 2, 'Iskandar', '$2y$10$74oBI5Pc4Q5PfRIsr2qBseiiS1t64zB2PpWpJbCw361a6OWNmbvAa', 'WWdmNDdaM3J5SW1heENLWkJiOEk=', '2019-08-25 11:12:50', '2019-09-21 06:24:37'),
+(2, 2, 'Iskandar', '$2y$10$74oBI5Pc4Q5PfRIsr2qBseiiS1t64zB2PpWpJbCw361a6OWNmbvAa', 'RklsZ0VHRno2Z2Z0SE1tdUg0MlI=', '2019-08-25 11:12:50', '2019-10-13 15:48:17'),
 (3, 3124, 'Testuser', '$2y$10$1SHCGJhsyFFP.1Qz6CITnOTrzFWnRuSHdqjbDQpxJ/d8yiwMkOws.', 'bnBXZmJ4SlJZcEJYTEtDQzJpREU=', '2019-09-18 06:15:25', '2019-09-18 06:15:25');
 
 --
@@ -13334,6 +13334,12 @@ ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `pengadaan`
+--
+ALTER TABLE `pengadaan`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -13347,25 +13353,31 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `audits`
 --
 ALTER TABLE `audits`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `barang_keluar`
 --
 ALTER TABLE `barang_keluar`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `barang_masuk`
 --
 ALTER TABLE `barang_masuk`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `pengadaan`
+--
+ALTER TABLE `pengadaan`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `user`
