@@ -76,7 +76,7 @@ $router->group(['prefix'=>'api'], function() use($router){
 
         // ============================== BARANG KELUAR ==============================
         
-        $router->get('/barangkeluardis', 'BarangKeluarController@ShowDistinct'); // Tampilkan Semua Barang Keluar
+        $router->get('/barangkeluardis', 'BarangKeluarController@DistinctShow'); // Tampilkan Semua Barang Keluar
 
         $router->get('/barangkeluarshowall', 'BarangKeluarController@ShowAll'); // Tampilkan Semua Barang Keluar
 
@@ -98,6 +98,8 @@ $router->group(['prefix'=>'api'], function() use($router){
         $router->get('/barangmasuksingle/{id}', 'BarangMasukController@ShowSingle'); // Tampilkan Satu Barang Keluar
 
         $router->post('/barangmasukinsert', 'BarangMasukController@InsertBarangMasuk'); // Masukkan Barang Keluar Baru
+
+        $router->post('/barangmasukinsertrepeat', 'BarangMasukController@insertBarangMasukRepeat'); // Masukkan Barang Keluar Baru
 
         $router->post('/barangmasukupdate', 'BarangMasukController@updateBarangMasuk'); // Update Barang Keluar
 

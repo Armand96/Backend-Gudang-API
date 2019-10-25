@@ -128,7 +128,6 @@ class BarangListController extends Controller
             'data'=>$data
         ]);
     }
-    
 
     public function perubahanKuantitas(Request $req){
 

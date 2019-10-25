@@ -97,7 +97,7 @@ class BarangKeluarController extends Controller
 
     public function deleteBarangKeluar($id){
 
-        $data = BarangKeluar::where('id', $req->input('id'))->first();
+        $data = BarangKeluar::where('id', $id->input('id'))->first();
         
         if($data->delete()){
             return response()->json([
@@ -195,6 +195,33 @@ class BarangKeluarController extends Controller
 
     }
 
+    // BUAT INSERT DATA BARANG MASUK SEKALIGUS
+    public function insertBarangKeluarRepeat(Request $req)
+    {
+        $success = false;
+
+        foreach ($req->input('array_barang') as $val) {
+            $data = new BarangKeluar();
+            $data->no_bapm = $req->input('no_bapm');
+            $data->asal_barang = $req->input('asal_barang');
+            $data->no_kontrak = $req->input('no_kontrak');
+            $data->keterangan = $req->input('keterangan');
+            $data->nomor_barang = $val['nomor_barang'];
+            $data->jml_msk_angka = $val['jml_msk_angka'];
+            $data->jml_msk_huruf = $val['jml_msk_huruf'];
+            $success = $data->save();
+            if (!$success) {
+                return response()->json([
+                    'success' => $success
+                ]);
+            }
+        }
+
+        return response()->json([
+            'success' => $success
+        ]);
+    }
+
     public function selectBasedNomorBarang(Request $req){
         
         array_push($this->selfield, 'jml_klr_huruf');
@@ -228,9 +255,9 @@ class BarangKeluarController extends Controller
 
     // ===================================== DISTINCT
 
-    public function ShowDistinct(){
+    public function DistinctShow(){
         
-        $data = BarangKeluar::distinct()->get(['proyek', 'no_spm', 'no_order', 'kode_pekerjaan']);
+        $data = BarangKeluar::distinct()->get(['no_spm','proyek', 'no_order', 'kode_pekerjaan']);
         return response()->json([
             'success' => true,
             'data' => $data
