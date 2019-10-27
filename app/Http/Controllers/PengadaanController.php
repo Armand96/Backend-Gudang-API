@@ -34,6 +34,17 @@ class PengadaanController extends Controller
         ]);
     }
 
+    public function deleteSPP($id){
+
+        $data = Pengadaan::where('id', $id)->first();
+        
+        if($data->delete()){
+            return response()->json([
+                'success' => true
+            ]);
+        }
+    }
+
     public function InsertPengadaan(Request $req){
 
         // 'userid','tipe_audit', 'nomor_barang', 'barang_keluar_id', 

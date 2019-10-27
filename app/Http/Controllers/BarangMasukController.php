@@ -97,7 +97,6 @@ class BarangMasukController extends Controller
     // BUAT EDIT BARANG MASUK
     public function updateBarangMasuk(Request $req)
     {
-        // 
         $data = BarangMasuk::where('id', $req->input('id'))->first();
         $data->no_bapm = $req->input('no_bapm');
         $data->asal_barang = $req->input('asal_barang');
@@ -118,7 +117,7 @@ class BarangMasukController extends Controller
     public function deleteBarangMasuk($id)
     {
 
-        $data = BarangMasuk::where('id', $id->input('id'))->first();
+        $data = BarangMasuk::where('id', $id)->first();
 
         if ($data->delete()) {
             return response()->json([

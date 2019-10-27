@@ -62,6 +62,17 @@ class NoOrderController extends Controller
         }
     }
 
+    public function deleteNoOrder(Request $req){
+
+        $data = NoOrder::where('no_order', $req->input('no_order'))->first();
+        
+        if($data->delete()){
+            return response()->json([
+                'success' => true
+            ]);
+        }
+    }
+
 }
 
 

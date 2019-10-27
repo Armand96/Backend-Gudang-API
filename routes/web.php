@@ -43,6 +43,8 @@ $router->group(['prefix'=>'api'], function() use($router){
         $router->post('/noordercreate', 'NoOrderController@newNoOrder');
 
         $router->post('/noorderupdate', 'NoOrderController@UpdateOrder');
+
+        $router->post('/noorderdelete', 'NoOrderController@deleteNoOrder');
         
         // ================================= NO ORDER =================================
 
@@ -55,6 +57,8 @@ $router->group(['prefix'=>'api'], function() use($router){
         $router->post('/kodepekerjaancreate', 'KodePekerjaanController@Create');
 
         $router->post('/kodepekerjaanupdate', 'KodePekerjaanController@Update');
+
+        $router->post('/kodepekerjaanrdelete', 'KodePekerjaanController@deleteKodePekerjaan');
         
         // ================================= KODE PEKERJAAN =================================
 
@@ -86,6 +90,8 @@ $router->group(['prefix'=>'api'], function() use($router){
 
         $router->post('/barangkeluarupdate', 'BarangKeluarController@updateBarangKeluar'); // Update Barang Keluar
 
+        $router->get('/barangkeluardelete/{id}', 'BarangKeluarController@deleteBarangKeluar'); // Delete Barang Keluar
+
         // ============================== BARANG KELUAR ==============================
 
 
@@ -102,6 +108,8 @@ $router->group(['prefix'=>'api'], function() use($router){
         $router->post('/barangmasukinsertrepeat', 'BarangMasukController@insertBarangMasukRepeat'); // Masukkan Barang Keluar Baru
 
         $router->post('/barangmasukupdate', 'BarangMasukController@updateBarangMasuk'); // Update Barang Keluar
+
+        $router->get('/barangmasukdelete/{id}', 'BarangMasukController@deleteBarangMasuk'); // Delete Barang Masuk
 
         // ============================== BARANG MASUK ==============================
 
@@ -125,6 +133,8 @@ $router->group(['prefix'=>'api'], function() use($router){
         $router->post('/pengadaaninsert', 'PengadaanController@InsertPengadaan'); // Masukkan Pengadaan Baru
 
         $router->post('/pengadaanupdate', 'PengadaanController@UpdatePengadaan'); // Update Pengadaan
+
+        $router->get('/pengadaandelete/{id}', 'PengadaanController@deleteSPP'); // Delete Barang Masuk
 
         // ================================ PENGADAAN ================================
 
@@ -156,7 +166,6 @@ $router->group(['prefix'=>'api'], function() use($router){
         $router->get('/nospmdis', 'BarangKeluarController@DistinctNoSPM');
 
         #================================ END OF BARANG KELUAR ================================
-
 
         #================================ BARANG MASUK ================================
 

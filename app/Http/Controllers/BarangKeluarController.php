@@ -97,7 +97,7 @@ class BarangKeluarController extends Controller
 
     public function deleteBarangKeluar($id){
 
-        $data = BarangKeluar::where('id', $id->input('id'))->first();
+        $data = BarangKeluar::where('id', $id)->first();
         
         if($data->delete()){
             return response()->json([

@@ -63,6 +63,17 @@ class KodePekerjaanController extends Controller
         }
     }
 
+    public function deleteKodePekerjaan(Request $req){
+
+        $data = KodePekerjaan::where('kode_pekerjaan', $req->input('kode_pekerjaan'))->first();
+        if($data->delete()){
+            return response()->json([
+                'success' => true
+            ]);
+        }
+    }
+
+
 }
 
 
