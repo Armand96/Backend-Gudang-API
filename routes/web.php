@@ -34,17 +34,27 @@ $router->group(['prefix'=>'api'], function() use($router){
     
     $router->group(['middleware'=>'auth'], function() use($router){
 
+        // ================================= Bengkel =================================
+
+        $router->get('/bengkelall', 'BengkelController@index');
+        $router->post('/bengkelinsert', 'BengkelController@newBengkel');
+        $router->post('/bengkelupdate', 'BengkelController@updateBengkel');
+        $router->get('/bengkeldelete/{id}', 'BengkelController@deleteBengkel');
+        $router->get('/bengkelread/{id}', 'BengkelController@singleBengkel');
+
+        // ================================= Bengkel =================================
+
         // ================================= NO ORDER =================================
 
-        $router->get('/noorderall', 'NoOrderController@ShowAll');
+        // $router->get('/noorderall', 'NoOrderController@ShowAll');
 
-        $router->post('/noordersingle', 'NoOrderController@ShowSingle');
+        // $router->post('/noordersingle', 'NoOrderController@ShowSingle');
 
-        $router->post('/noordercreate', 'NoOrderController@newNoOrder');
+        // $router->post('/noordercreate', 'NoOrderController@newNoOrder');
 
-        $router->post('/noorderupdate', 'NoOrderController@UpdateOrder');
+        // $router->post('/noorderupdate', 'NoOrderController@UpdateOrder');
 
-        $router->post('/noorderdelete', 'NoOrderController@deleteNoOrder');
+        // $router->post('/noorderdelete', 'NoOrderController@deleteNoOrder');
         
         // ================================= NO ORDER =================================
 

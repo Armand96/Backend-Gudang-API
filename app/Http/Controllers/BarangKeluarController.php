@@ -21,7 +21,7 @@ class BarangKeluarController extends Controller
     private $selfield = ['id','barang_keluar.nomor_barang', 'barang_list.nama_barang',
                         'proyek', 'barang_keluar.no_order', 'barang_keluar.kode_pekerjaan',
                         'tgl_keluar', 'jml_klr_permintaan_angka', 'jml_klr_angka', 'kode_pekerjaan.pekerjaan',
-                        'no_order.bengkel', 'no_spm'];
+                        'bengkel', 'no_spm'];
     //
     public function ShowAll(){
 
@@ -37,7 +37,7 @@ class BarangKeluarController extends Controller
 
     public function ShowSingle($id){
         unset($this->selfield[9]);
-        unset($this->selfield[10]);
+        // unset($this->selfield[10]);
         array_push($this->selfield, 'jml_klr_permintaan_huruf', 'jml_klr_huruf');
         $data = BarangKeluar::where('id', $id)
                 ->leftJoin('barang_list', 'barang_list.nomor_barang', '=', 'barang_keluar.nomor_barang')
@@ -56,7 +56,7 @@ class BarangKeluarController extends Controller
         $data->no_spm = $req->input('no_spm');
         $data->proyek = $req->input('proyek');
         $data->no_order = $req->input('no_order');
-        // $data->bengkel = $req->input('bengkel'); 
+        $data->bengkel = $req->input('bengkel'); 
         // $data->pekerjaan = $req->input('pekerjaan');
         $data->kode_pekerjaan = $req->input('kode_pekerjaan');
         $data->tgl_keluar = $req->input('tgl_keluar');
@@ -81,7 +81,8 @@ class BarangKeluarController extends Controller
         $data->no_spm = $req->input('no_spm');
         $data->proyek = $req->input('proyek');
         $data->no_order = $req->input('no_order');
-        $data->no_order = $req->input('kode_pekerjaan');
+        $data->bengkel = $req->input('bengkel');
+        $data->kode_pekerjaan = $req->input('kode_pekerjaan');
         $data->tgl_keluar = $req->input('tgl_keluar');
         $data->nomor_barang = $req->input('nomor_barang');
         $data->jml_klr_angka = $req->input('jml_klr_angka');
@@ -112,7 +113,7 @@ class BarangKeluarController extends Controller
         $data = BarangKeluar::where('no_spm', '=', $req->input('no_spm'))
                             ->leftJoin('barang_list', 'barang_list.nomor_barang', '=', 'barang_keluar.nomor_barang')
                             ->leftJoin('kode_pekerjaan', 'kode_pekerjaan.kode_pekerjaan', '=', 'barang_keluar.kode_pekerjaan')
-                            ->leftJoin('no_order', 'no_order.no_order', '=', 'barang_keluar.no_order')
+                            // ->leftJoin('no_order', 'no_order.no_order', '=', 'barang_keluar.no_order')
                             ->select($this->selfield)->get();
 
         // $json['proyek'] = $req->input('proyek');
@@ -130,7 +131,7 @@ class BarangKeluarController extends Controller
         $data = BarangKeluar::where('proyek', '=', $req->input('proyek'))
                             ->leftJoin('barang_list', 'barang_list.nomor_barang', '=', 'barang_keluar.nomor_barang')
                             ->leftJoin('kode_pekerjaan', 'kode_pekerjaan.kode_pekerjaan', '=', 'barang_keluar.kode_pekerjaan')
-                            ->leftJoin('no_order', 'no_order.no_order', '=', 'barang_keluar.no_order')
+                            // ->leftJoin('no_order', 'no_order.no_order', '=', 'barang_keluar.no_order')
                             ->select($this->selfield)->get();
 
         $json['proyek'] = $req->input('proyek');
@@ -148,7 +149,7 @@ class BarangKeluarController extends Controller
         $data = BarangKeluar::where('bengkel', '=', $req->input('bengkel'))
                             ->leftJoin('barang_list', 'barang_list.nomor_barang', '=', 'barang_keluar.nomor_barang')
                             ->leftJoin('kode_pekerjaan', 'kode_pekerjaan.kode_pekerjaan', '=', 'barang_keluar.kode_pekerjaan')
-                            ->leftJoin('no_order', 'no_order.no_order', '=', 'barang_keluar.no_order')
+                            // ->leftJoin('no_order', 'no_order.no_order', '=', 'barang_keluar.no_order')
                             ->select($this->selfield)->get();
         // $json['bengkel'] = $req->input('bengkel');
         $json['arraydata'] = $data;
@@ -166,7 +167,7 @@ class BarangKeluarController extends Controller
         $data = BarangKeluar::where('barang_keluar.no_order', '=', $req->input('no_order'))
                             ->leftJoin('barang_list', 'barang_list.nomor_barang', '=', 'barang_keluar.nomor_barang')
                             ->leftJoin('kode_pekerjaan', 'kode_pekerjaan.kode_pekerjaan', '=', 'barang_keluar.kode_pekerjaan')
-                            ->leftJoin('no_order', 'no_order.no_order', '=', 'barang_keluar.no_order')
+                            // ->leftJoin('no_order', 'no_order.no_order', '=', 'barang_keluar.no_order')
                             ->select($this->selfield)->get();
         // $json['bengkel'] = $req->input('bengkel');
         $json['arraydata'] = $data;
@@ -228,7 +229,7 @@ class BarangKeluarController extends Controller
         $data = BarangKeluar::where('barang_keluar.nomor_barang', '=', $req->input('nomor_barang'))
                                 ->leftJoin('barang_list', 'barang_list.nomor_barang', '=', 'barang_keluar.nomor_barang')
                                 ->leftJoin('kode_pekerjaan', 'kode_pekerjaan.kode_pekerjaan', '=', 'barang_keluar.kode_pekerjaan')
-                                ->leftJoin('no_order', 'no_order.no_order', '=', 'barang_keluar.no_order')
+                                // ->leftJoin('no_order', 'no_order.no_order', '=', 'barang_keluar.no_order')
                                 ->select($this->selfield)->get();
         $json['nomor_barang'] = $req->input('nomor_barang');
         $json['nama_barang'] = $data[0]->nama_barang;
