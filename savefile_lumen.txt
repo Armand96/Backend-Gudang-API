@@ -1,0 +1,23 @@
+public function testFile(Request $reqs){
+        $fileName = $reqs->file('gambar')->getClientOriginalName();
+        $destination_path = storage_path('image/listbarang/');
+        $current_avatar_path = $destination_path.$fileName;
+        if ($reqs->hasFile('gambar')){
+            if ($reqs->file('gambar')->isValid()) {
+                
+                if (file_exists($current_avatar_path)) {
+                    // unlink($current_avatar_path); //unlink for remove image
+                    // return 'file sudah ada';
+                } else {
+                    if ($reqs->file('gambar')->move($destination_path, $fileName)) {
+                        return response()->json(['success'=>true]);
+                    } else {
+                        return response()->json(['success'=>false]);
+                    }
+                }
+                
+
+               
+            }
+        }
+    }
