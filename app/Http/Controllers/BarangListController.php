@@ -60,19 +60,18 @@ class BarangListController extends Controller
             $namafile = str_replace(' ', '_', $data->nomor_barang).'_'.str_replace(' ', '_', $data->nama_barang).$extname;
             $req->file('foto')->move(storage_path('gambar_barang'), $namafile);
             $data->foto = $namafile;
-            
+        } else $data->foto = "";
+
+        // return $data;
+
+        if ($data->save())
+        {
+            return response()->json([
+                'success' => true
+            ]);
+        } else {
+            unlink(storage_path('gambar_barang').'/'.$namafile);
         }
-
-        return $data;
-
-        // if ($data->save())
-        // {
-        //     return response()->json([
-        //         'success' => true
-        //     ]);
-        // } else {
-        //     unlink(storage_path('gambar_barang').'/'.$namafile);
-        // }
     }
 
     public function ambilFoto($namafile){
