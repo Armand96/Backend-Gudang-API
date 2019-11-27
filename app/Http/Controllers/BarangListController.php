@@ -57,7 +57,7 @@ class BarangListController extends Controller
         if ($req->hasFile('foto')){
             // dd($req->file('foto'));
             $extname = '.'.$req->file('foto')->getClientOriginalExtension();
-            $namafile = str_replace(' ', '_', $data->nomor_barang).'_'.str_replace(' ', '_', $data->nama_barang).'.'.$extname;
+            $namafile = str_replace(' ', '_', $data->nomor_barang).'_'.str_replace(' ', '_', $data->nama_barang).$extname;
             $req->file('foto')->move(storage_path('gambar_barang'), $namafile);
             $data->foto = $namafile;
             
