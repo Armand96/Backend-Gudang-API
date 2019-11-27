@@ -38,7 +38,12 @@ class BarangListController extends Controller
 
     public function InsertBarang(Request $req){
 
+        // $this->validate($req, [
+        //     'foto' => 'required|image',
+        // ]);
+
         // 'nomor_barang', 'nama_barang', 'satuan', 'kuantitas', 'harga_satuan', 'dibuat_oleh'
+        $namafile = "";
         $data = new BarangList();
         $data->nomor_barang = $req->input('nomor_barang');
         $data->nama_barang = $req->input('nama_barang');
@@ -46,12 +51,47 @@ class BarangListController extends Controller
         $data->kuantitas = $req->input('kuantitas');
         $data->harga_satuan = $req->input('harga_satuan');
         $data->dibuat_oleh = $req->input('dibuat_oleh');
+        
+        // return ($req);
 
-        if ($data->save())
-        {
-            return response()->json([
-                'success' => true
-            ]);
+        if ($req->hasFile('foto')){
+            // dd($req->file('foto'));
+            $extname = '.'.$req->file('foto')->getClientOriginalExtension();
+            $namafile = str_replace(' ', '_', $data->nomor_barang).'_'.str_replace(' ', '_', $data->nama_barang).'.'.$extname;
+            $req->file('foto')->move(storage_path('gambar_barang'), $namafile);
+            $data->foto = $namafile;
+            
+        }
+
+        return $data;
+
+        // if ($data->save())
+        // {
+        //     return response()->json([
+        //         'success' => true
+        //     ]);
+        // } else {
+        //     unlink(storage_path('gambar_barang').'/'.$namafile);
+        // }
+    }
+
+    public function ambilFoto($namafile){
+        $imgpath = storage_path('gambar_barang') . '/' . $namafile;
+        if (file_exists($imgpath)) {
+            $file = file_get_contents($imgpath);
+            return response($file, 200)->header('Content-Type', 'image/jpeg');
+          }$res['success'] = false;
+          $res['message'] = "Gambar Tidak Ditemukan";
+          
+        return $res;
+    }
+
+    private function checks($user_profile){
+        if ($user_profile) {
+            $current_avatar_path = storage_path('avatar') . '/' . $user_profile->avatar;
+            if (file_exists($current_avatar_path)) {
+              unlink($current_avatar_path);
+            }
         }
     }
 

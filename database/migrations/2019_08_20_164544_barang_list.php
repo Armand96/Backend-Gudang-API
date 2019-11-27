@@ -19,6 +19,7 @@ class BarangList extends Migration
             $table->string('satuan', 10);
             $table->integer('kuantitas', false, true);
             $table->integer('harga_satuan', false, false);
+            $table->string('foto', 100)->nullable();
             $table->string('dibuat_oleh', 10);
             $table->timestamps();
         });

@@ -27,7 +27,7 @@ class BarangMasukController extends Controller
     //
     public function ShowAll()
     {
-        $data = BarangMasuk::all();
+        $data = BarangMasuk::orderBy('tgl_masuk', 'DESC')->get();
         return response()->json([
             'success' => true,
             'data' => $data

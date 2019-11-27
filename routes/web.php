@@ -85,6 +85,8 @@ $router->group(['prefix'=>'api'], function() use($router){
 
         $router->post('/barangupdateq', 'BarangListController@perubahanKuantitas'); // Update Kuantitas
 
+        $router->get('/barangfoto/{namafile}', 'BarangListController@ambilFoto'); // Ambil Foto Barang
+
         // ================================= LIST BARANG =================================
 
 

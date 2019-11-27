@@ -27,7 +27,7 @@ class BarangList extends Model //implements AuthenticatableContract, Authorizabl
      * @var array
      */
     protected $fillable = [
-        'nomor_barang', 'nama_barang', 'satuan', 'kuantitas', 'harga_satuan', 'dibuat_oleh'
+        'nomor_barang', 'nama_barang', 'satuan', 'kuantitas', 'harga_satuan', 'dibuat_oleh', 'foto'
     ];
 
     /**

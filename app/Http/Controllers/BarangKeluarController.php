@@ -28,7 +28,7 @@ class BarangKeluarController extends Controller
         // unset($this->selfield[7]);
         // unset($this->selfield[8]);
 
-        $data = BarangKeluar::all();
+        $data = BarangKeluar::orderBy('tgl_keluar', 'DESC')->get();
         return response()->json([
             'success' => true,
             'data' => $data
